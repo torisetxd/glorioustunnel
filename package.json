@@ -1,11 +1,10 @@
 {
-  "private": true,
   "description": "Expose any local TCP/IP service on the internet.",
   "repository": "torisetxd/glorioustunnel",
   "author": "berstend & tewarid",
   "license": "MIT",
   "engines": {
-    "node": ">=8"
+    "node": ">=20"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
@@ -16,7 +15,8 @@
   "workspaces": [
     "packages/*"
   ],
-  "devDependencies": {
+  "version": "1.0.0",
+  "dependencies": {
     "lerna": "^2.11.0"
   }
 }

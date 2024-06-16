@@ -11,7 +11,7 @@
     "test": "ava -v && standard"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=20"
   },
   "keywords": [
     "glorioustunnel-tcp-relay",

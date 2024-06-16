@@ -14,7 +14,7 @@
     "test": "ava -v && standard"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=20"
   },
   "bin": {
     "glorioustunnel": "./cli.js"
