@@ -5,8 +5,8 @@ const { test } = require('ava')
 const http = require('http')
 const got = require('got')
 
-const { Client } = require('hypertunnel')
-const { Server } = require('hypertunnel-server')
+const { Client } = require('glorioustunnel')
+const { Server } = require('glorioustunnel-server')
 
 test('will create a usable https tunnel with --ssl', async (t) => {
   // Don't reject self signed certs
@@ -15,7 +15,7 @@ test('will create a usable https tunnel with --ssl', async (t) => {
   // create server
   const serverData = {
     serverPort: 61555,
-    serverDomain: 'local.hypertunnel.lvh.me',
+    serverDomain: 'local.glorioustunnel.lvh.me',
     serverToken: 'foobar-token'
   }
   const serverUrl = `http://${serverData.serverDomain}:${serverData.serverPort}`

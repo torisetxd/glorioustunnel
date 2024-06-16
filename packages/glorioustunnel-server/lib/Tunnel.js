@@ -1,9 +1,9 @@
 'use strict'
 
-const debug = require('debug')('hypertunnel:tunnel')
+const debug = require('debug')('glorioustunnel:tunnel')
 
 /**
- * A tunnel holds the relation of an internet port and a hypertunnel-tcp-relay server.
+ * A tunnel holds the relation of an internet port and a glorioustunnel-tcp-relay server.
  */
 class Tunnel {
   constructor (internetPort, relay, opts = {}) {

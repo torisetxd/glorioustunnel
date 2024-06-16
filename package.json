@@ -1,7 +1,7 @@
 {
   "private": true,
   "description": "Expose any local TCP/IP service on the internet.",
-  "repository": "berstend/hypertunnel",
+  "repository": "torisetxd/glorioustunnel",
   "author": "berstend & tewarid",
   "license": "MIT",
   "engines": {

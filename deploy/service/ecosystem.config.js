@@ -1,12 +1,12 @@
 'use strict'
 
 const CONFIG = {
-  projectName: 'hypertunnel',
-  serviceName: 'hypertunnel-service',
+  projectName: 'glorioustunnel',
+  serviceName: 'glorioustunnel-service',
   deployUser: 'deploy',
   hosts: {
     vagrant: '192.168.33.10',
-    remote: 'hypertunnel.ga'
+    remote: 'glorioustunnel.ga'
   }
 }
 
@@ -26,19 +26,19 @@ module.exports = {
       user: CONFIG.deployUser,
       host: CONFIG.hosts.remote,
       ref: 'origin/master',
-      repo: 'https://github.com/berstend/hypertunnel.git',
+      repo: 'https://github.com/torisetxd/glorioustunnel.git',
       path: `/home/${CONFIG.deployUser}/${CONFIG.serviceName}`,
-      'post-deploy': 'cd deploy/service && npm install hypertunnel-server@latest; authbind --deep pm2 startOrRestart ecosystem.config.js',
+      'post-deploy': 'cd deploy/service && npm install glorioustunnel-server@latest; authbind --deep pm2 startOrRestart ecosystem.config.js',
       env: {
         NODE_ENV: 'production',
         DEBUG: false,
         SERVER_PORT: 80,
-        SERVER_DOMAIN: `hypertunnel.ga`,
-        SERVER_TOKEN: 'free-server-please-be-nice',
+        SERVER_DOMAIN: `glorioustunnel.ga`,
+        SERVER_TOKEN: 'freeTunnel',
         SSL_ENABLED: true,
         SSL_DEBUG: false,
         SSL_PORT: 443,
-        SSL_EMAIL: 'mail@hypertunnel.ga',
+        SSL_EMAIL: 'mail@glorioustunnel.ga',
         SSL_PRODUCTION: true
       }
     },
@@ -49,15 +49,15 @@ module.exports = {
       user: CONFIG.deployUser,
       host: CONFIG.hosts.vagrant,
       ref: 'origin/master',
-      repo: 'https://github.com/berstend/hypertunnel.git',
+      repo: 'https://github.com/torisetxd/glorioustunnel.git',
       path: `/home/${CONFIG.deployUser}/${CONFIG.serviceName}`,
-      'post-deploy': 'cd deploy/service && npm install hypertunnel-server@latest && authbind --deep pm2 startOrRestart ecosystem.config.js',
+      'post-deploy': 'cd deploy/service && npm install glorioustunnel-server@latest && authbind --deep pm2 startOrRestart ecosystem.config.js',
       env: {
         NODE_ENV: 'development',
-        DEBUG: 'hypertunnel:*',
+        DEBUG: 'glorioustunnel:*',
         SERVER_PORT: 80,
         SERVER_DOMAIN: `${CONFIG.hosts.vagrant}.xip.io`,
-        SERVER_TOKEN: 'free-server-please-be-nice'
+        SERVER_TOKEN: 'freeTunnel'
       }
     }
   }

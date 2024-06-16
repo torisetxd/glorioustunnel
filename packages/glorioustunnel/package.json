@@ -1,13 +1,13 @@
 {
-  "name": "hypertunnel",
+  "name": "glorioustunnel",
   "version": "1.2.8",
   "description": "Expose any local TCP/IP service on the internet.",
   "main": "index.js",
-  "repository": "berstend/hypertunnel",
+  "repository": "torisetxd/glorioustunnel",
   "author": "berstend & tewarid",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/berstend/hypertunnel/issues"
+    "url": "https://github.com/torisetxd/glorioustunnel/issues"
   },
   "scripts": {
     "docs": "exit 0",
@@ -17,10 +17,10 @@
     "node": ">=8"
   },
   "bin": {
-    "hypertunnel": "./cli.js"
+    "glorioustunnel": "./cli.js"
   },
   "keywords": [
-    "hypertunnel",
+    "glorioustunnel",
     "localtunnel",
     "ngrok",
     "tcp/ip",
@@ -35,7 +35,7 @@
     "commander": "^2.15.1",
     "debug": "^3.1.0",
     "got": "^8.3.1",
-    "hypertunnel-tcp-relay": "^1.2.7",
+    "glorioustunnel-tcp-relay": "^1.2.7",
     "url-parse": "^1.4.1"
   },
   "devDependencies": {

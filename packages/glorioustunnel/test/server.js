@@ -4,12 +4,12 @@ const { test } = require('ava')
 
 const got = require('got')
 
-const { Server } = require('hypertunnel-server')
+const { Server } = require('glorioustunnel-server')
 
 test('can start and stop a server', async (t) => {
   const serverData = {
     serverPort: 60666,
-    serverDomain: 'local.hypertunnel.lvh.me',
+    serverDomain: 'local.glorioustunnel.lvh.me',
     serverToken: 'foobar-token'
   }
   const serverUrl = `http://${serverData.serverDomain}:${serverData.serverPort}`

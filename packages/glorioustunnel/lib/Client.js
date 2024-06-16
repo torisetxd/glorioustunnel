@@ -1,21 +1,21 @@
 'use strict'
 
-const debug = require('debug')('hypertunnel:client')
+const debug = require('debug')('glorioustunnel:client')
 
-const { RelayClient } = require('hypertunnel-tcp-relay').Client
+const { RelayClient } = require('glorioustunnel-tcp-relay').Client
 const parseUrl = require('url-parse')
 const got = require('got')
 
 /**
- * A hypertunnel client.
+ * A glorioustunnel client.
  */
 class Client {
   constructor (port, opts = {}, options = { ssl: false }) {
     this.port = port
     this.host = opts.host || 'localhost'
-    this.server = opts.server || 'https://hypertunnel.ga'
+    this.server = opts.server || 'http://tunnel.glorious.host'
     this.serverParts = parseUrl(this.server)
-    this.token = opts.token || 'free-server-please-be-nice'
+    this.token = opts.token || 'freeTunnel'
     this.desiredInternetPort = opts.internetPort
     this.options = options
 

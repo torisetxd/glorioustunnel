@@ -1,5 +1,5 @@
 # Used for ssh key, server hostname
-project_name: hypertunnel
+project_name: glorioustunnel
 
 nvm:
   user: deploy

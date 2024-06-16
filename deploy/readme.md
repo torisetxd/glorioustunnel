@@ -42,7 +42,7 @@ vagrant ssh
 ssh -l vagrant -i ./.vagrant/machines/default/virtualbox/private_key 127.0.0.1 -p 2222
 
 # ssh into machine (vanilla ssh, deploy user)
-ssh -l deploy -i ~/.ssh/hypertunnel 127.0.0.1 -p 2222
+ssh -l deploy -i ~/.ssh/glorioustunnel 127.0.0.1 -p 2222
 ```
 
 #### Local
@@ -69,9 +69,9 @@ ansible-playbook provisioning/vagrant.yml -i provisioning/hosts --private-key=.v
 - Update `~/.ssh/config`:
 
 ```
-Host hypertunnel.ga
+Host glorioustunnel.ga
   User deploy
-  IdentityFile ~/.ssh/hypertunnel
+  IdentityFile ~/.ssh/glorioustunnel
   PreferredAuthentications publickey
 ```
 
@@ -104,7 +104,7 @@ pm2 deploy vagrant
 # ssh into vagrant machine for debugging:
 pm2 list
 pm2 monit
-pm2 logs hypertunnel-service --lines 200
+pm2 logs glorioustunnel-service --lines 200
 ```
 
 

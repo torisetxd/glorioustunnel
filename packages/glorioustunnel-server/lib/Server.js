@@ -1,6 +1,6 @@
 'use strict'
 
-const debug = require('debug')('hypertunnel:server')
+const debug = require('debug')('glorioustunnel:server')
 
 const path = require('path')
 const http = require('http')
@@ -41,7 +41,7 @@ class Server {
   }
 
   generateBannerMessage (body) {
-    if (this.serverToken !== 'free-server-please-be-nice') { return }
+    if (this.serverToken !== 'freeTunnel') { return }
     return `
   You're using a free service, please be gentle. :-)
   Contributions welcome: ${this.landingPage}
@@ -82,7 +82,7 @@ class Server {
 
     router.get('/status/versions', async (ctx, next) => {
       debug('/status/versions')
-      ctx.body = [require('hypertunnel-tcp-relay/package.json')]
+      ctx.body = [require('glorioustunnel-tcp-relay/package.json')]
     })
 
     router.get('/status/:internetPort', async (ctx, next) => {
@@ -97,7 +97,7 @@ class Server {
       }
     })
 
-    // curl -d '{"internetPort":"2666", "relayPort":"2333", "serverToken": "hypertunnel-free-server-please-be-nice"}' -H "Content-Type: application/json" -X POST http://localhost:3000/create
+    // curl -d '{"internetPort":"2666", "relayPort":"2333", "serverToken": "glorioustunnel-freeTunnel"}' -H "Content-Type: application/json" -X POST http://localhost:3000/create
     router.post('/create', async (ctx, next) => {
       debug('/create', ctx.request.body)
       const body = ctx.request.body
@@ -116,7 +116,7 @@ class Server {
         }
         const tunnel = await this.manager.newTunnel(parseInt(body.internetPort) || 0, parseInt(body.relayPort) || 0, opts)
         ctx.body = {
-          success: !!tunnel.relay,
+          success: !!tunnel.relay, // wtf???
           createdAt: tunnel.createdAt,
           relayPort: tunnel.relay.relayPort,
           internetPort: tunnel.relay.internetPort,

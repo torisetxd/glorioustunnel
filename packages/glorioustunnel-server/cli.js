@@ -10,8 +10,8 @@ module.exports = async (argv) => {
   program
     .version(version, '-v, --version')
     .option('-p, --port [port]', 'web server port', 3000)
-    .option('-d, --domain [domain]', 'public web server domain', 'hypertunnel.lvh.me')
-    .option('-t, --token [token]', 'token required to be sent by clients', 'free-server-please-be-nice')
+    .option('-d, --domain [domain]', 'public web server domain', 'glorioustunnel.lvh.me')
+    .option('-t, --token [token]', 'token required to be sent by clients', 'freeTunnel')
     .parse(argv)
 
   const server = new Server({

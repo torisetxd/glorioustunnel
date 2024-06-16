@@ -1,28 +1,28 @@
-# ✨  hypertunnel [![Build Status](https://travis-ci.org/berstend/hypertunnel.svg?branch=master)](https://travis-ci.org/berstend/hypertunnel) [![ ](https://img.shields.io/uptimerobot/status/m780555855-0760af5af94854abdcb02c82.svg)](https://stats.uptimerobot.com/PzXg8inWK) [![ ](https://img.shields.io/uptimerobot/ratio/m778918918-3e92c097147760ee39d02d36.svg)](https://stats.uptimerobot.com/PzXg8inWK) [![](https://packagephobia.now.sh/badge?p=hypertunnel)](https://packagephobia.now.sh/result?p=hypertunnel) [![ ](https://img.shields.io/npm/v/hypertunnel.svg)](https://www.npmjs.com/package/hypertunnel)
+# ✨  glorioustunnel [![Build Status](https://travis-ci.org/torisetxd/glorioustunnel.svg?branch=master)](https://travis-ci.org/torisetxd/glorioustunnel) [![ ](https://img.shields.io/uptimerobot/status/m780555855-0760af5af94854abdcb02c82.svg)](https://stats.uptimerobot.com/PzXg8inWK) [![ ](https://img.shields.io/uptimerobot/ratio/m778918918-3e92c097147760ee39d02d36.svg)](https://stats.uptimerobot.com/PzXg8inWK) [![](https://packagephobia.now.sh/badge?p=glorioustunnel)](https://packagephobia.now.sh/result?p=glorioustunnel) [![ ](https://img.shields.io/npm/v/glorioustunnel.svg)](https://www.npmjs.com/package/glorioustunnel)
 
-<a href="https://github.com/berstend/hypertunnel"><img src="https://i.stack.imgur.com/MN8RF.gif" width="280px" height="230px" align="right" /></a>
+<a href="https://github.com/torisetxd/glorioustunnel"><img src="https://i.stack.imgur.com/MN8RF.gif" width="280px" height="230px" align="right" /></a>
 
 
 > When localtunnel/ngrok is not enough.
 
-This free TCP relay/reverse proxy service can be used to **expose any TCP/IP service** running behind a NAT. It's using [hypertunnel-tcp-relay](/packages/hypertunnel-tcp-relay) under the hood, which itself is based on the excellent [node-tcp-relay](https://github.com/tewarid/node-tcp-relay) from [tewarid](https://github.com/tewarid), adding self-service multi-client support similar to localtunnel, a cool project name with "hyper" in it and **a free public server**.
+This free TCP relay/reverse proxy service can be used to **expose any TCP/IP service** running behind a NAT. It's using [glorioustunnel-tcp-relay](/packages/glorioustunnel-tcp-relay) under the hood, which itself is based on the excellent [node-tcp-relay](https://github.com/tewarid/node-tcp-relay) from [tewarid](https://github.com/tewarid), adding self-service multi-client support similar to localtunnel, a cool project name with "hyper" in it and **a free public server**.
 
 
 
 ## Installation
 ```bash
 # Use directly with no installation (npx is part of npm):
-❯❯❯ npx hypertunnel --port 8080
+❯❯❯ npx glorioustunnel --port 8080
 
 # Or install globally:
-❯❯❯ npm install -g hypertunnel
+❯❯❯ npm install -g glorioustunnel
 ```
 
 ## Usage
 ```bash
-❯❯❯ hypertunnel --help
+❯❯❯ glorioustunnel --help
 
-  Usage: hypertunnel --port 8080 [options]
+  Usage: glorioustunnel --port 8080 [options]
 
   Expose any local TCP/IP service on the internet.
 
@@ -31,8 +31,8 @@ This free TCP relay/reverse proxy service can be used to **expose any TCP/IP ser
     -v, --version                output the version number
     -p, --port [port]            local TCP/IP service port to tunnel
     -l, --localhost [localhost]  local server (default: localhost)
-    -s, --server [server]        hypertunnel server to use (default: https://hypertunnel.ga)
-    -t, --token [token]          token required by the server (default: free-server-please-be-nice)
+    -s, --server [server]        glorioustunnel server to use (default: http://tunnel.glorious.host)
+    -t, --token [token]          token required by the server (default: freeTunnel)
     -i, --internet-port [port]   the desired internet port on the public server
     --ssl                        enable SSL termination (https://) on the public server    
     -h, --help                   output usage information
@@ -54,34 +54,34 @@ Run a static web server in your current directory:
 ❯❯❯ npx http-server -p 7777
 ```
 
-In another terminal window create a hypertunnel to make that server accessible from the internet:
+In another terminal window create a glorioustunnel to make that server accessible from the internet:
 
 ```bash
-❯❯❯ npx hypertunnel -p 7777
+❯❯❯ npx glorioustunnel -p 7777
 ```
 
 Et voila:
 
 ```bash
-  ✨ Hypertunnel created.
+  ✨ glorioustunnel created.
 
-  Tunneling hypertunnel.ga:19432 > localhost:7777
+  Tunneling glorioustunnel.ga:19432 > localhost:7777
 ```
 
 #### Bonus: Free SSL termination (https://)
 
-Run hypertunnel with the `--ssl` flag, to let it know you wish for https support (with a valid certificate):
+Run glorioustunnel with the `--ssl` flag, to let it know you wish for https support (with a valid certificate):
 
 ```bash
-❯❯❯ npx hypertunnel@latest -p 7777 --ssl
+❯❯❯ npx glorioustunnel@latest -p 7777 --ssl
 ```
 ```bash
-  ✨ Hypertunnel created.
+  ✨ glorioustunnel created.
 
-  Tunneling https://hypertunnel.ga:26949 > localhost:7777
+  Tunneling http://tunnel.glorious.host:26949 > localhost:7777
 ```
 
-SSL is not enabled by default as it makes mostly sense for HTTP servers, which is not the sole use-case for hypertunnel. :-)
+SSL is not enabled by default as it makes mostly sense for HTTP servers, which is not the sole use-case for glorioustunnel. :-)
 
 
 #### Tip: Run commands in parallel
@@ -89,7 +89,7 @@ SSL is not enabled by default as it makes mostly sense for HTTP servers, which i
 You can use bash niceties to run mutiple commands in parallel and stop all of them when hitting `ctrl+c`:
 
 ```bash
-❯❯❯ (npx http-server -p 7777 & npx hypertunnel --port 7777 --ssl)
+❯❯❯ (npx http-server -p 7777 & npx glorioustunnel --port 7777 --ssl)
 ```
 
 
@@ -102,7 +102,7 @@ You can use bash niceties to run mutiple commands in parallel and stop all of th
 
 ### Example: Remote SSH login
 
-As hypertunnel is a generic TCP/IP relay, why not use it for something different than a webserver.
+As glorioustunnel is a generic TCP/IP relay, why not use it for something different than a webserver.
 
 Say you're running MacOS or Linux on your workstation and you want to quickly ssh into it from anywhere.
 
@@ -110,17 +110,17 @@ Say you're running MacOS or Linux on your workstation and you want to quickly ss
 
 ```bash
 # Create a tunnel for the local SSH service running on port 22
-❯❯❯ npx hypertunnel --port 22
+❯❯❯ npx glorioustunnel --port 22
 ```
 
-Use the hypertunnel to SSH into that machine, from anywhere:
+Use the glorioustunnel to SSH into that machine, from anywhere:
 
 ```bash
 # Example, adjust the port based on the previous output:
-❯❯❯ ssh hypertunnel.ga -p 21357
+❯❯❯ ssh glorioustunnel.ga -p 21357
 ```
 ```bash
-Warning: Permanently added 'hypertunnel.ga:21357' (ECDSA) to the list of known hosts.
+Warning: Permanently added 'glorioustunnel.ga:21357' (ECDSA) to the list of known hosts.
 Password:
 ```
 
@@ -140,17 +140,17 @@ Password:
 In another terminal:
 
 ```bash
-❯❯❯ npx hypertunnel -p 3000
+❯❯❯ npx glorioustunnel -p 3000
 ```
 
 From anywhere:
 
 ```bash
-❯❯❯ telnet hypertunnel.ga 31967
+❯❯❯ telnet glorioustunnel.ga 31967
 ```
 ```bash
 Trying 159.69.23.189...
-Connected to hypertunnel.ga.
+Connected to glorioustunnel.ga.
 Escape character is '^]'.
 bob
 Welcome, ::ffff:127.0.0.1:56252
@@ -172,20 +172,20 @@ Enter username: You are now bob
 Both are great services! 
 If your use-case is to simply tunnel local http web server traffic I suggest using them. :-)
 
-I ran into issues when trying to expose a local proxy server (to use the client as forwarding proxy). Both services need to inspect and rewrite HTTP headers for routing, so using the tunnel as a proxy in e.g. Chrome won't work. There are a couple other use-cases where raw TCP stream tunnelling is desired and hypertunnel is the only available option.
+I ran into issues when trying to expose a local proxy server (to use the client as forwarding proxy). Both services need to inspect and rewrite HTTP headers for routing, so using the tunnel as a proxy in e.g. Chrome won't work. There are a couple other use-cases where raw TCP stream tunnelling is desired and glorioustunnel is the only available option.
 
 **Technical differences**
 
-Instead of using hostnames to direct traffic to clients, hypertunnel is using **a dedicated public port per tunnel**. This greatly simplifies things as TCP/IP traffic can be routed based on the assigned port, without http header inspection and rewriting.
+Instead of using hostnames to direct traffic to clients, glorioustunnel is using **a dedicated public port per tunnel**. This greatly simplifies things as TCP/IP traffic can be routed based on the assigned port, without http header inspection and rewriting.
 
 
-## Free server: hypertunnel.ga
+## Free server: glorioustunnel.ga
 
 I really like the simplicity of services like [localtunnel](https://github.com/localtunnel/localtunnel) & [ngrok](https://ngrok.com/) as they're **generously offering a free server**.
-I'm doing the same for hypertunnel but beware of using this free server in mission critical settings.
+I'm doing the same for glorioustunnel but beware of using this free server in mission critical settings.
 If you'd like to offer sponsorship for the public server feel cheered at and please raise a ticket. :-)
 
-PS: You can also self-host a private [hypertunnel-server](/packages/hypertunnel-server) and point the [client](/packages/hypertunnel) to it.
+PS: You can also self-host a private [glorioustunnel-server](/packages/glorioustunnel-server) and point the [client](/packages/glorioustunnel) to it.
 
 **Limits**
 
@@ -200,16 +200,16 @@ It's doing what it says on the tin. Certain things could be improved and battle-
 
 The CLI interface is stable, but programmatic usage comes with no warranty as internals might change in the future (the internals are also not properly documented currently).
 
-Have a look at the [tests](/test/) to get an idea of how to use hypertunnel programmatically.
+Have a look at the [tests](/test/) to get an idea of how to use glorioustunnel programmatically.
 
-Given that there is no alternative to hypertunnel I figured I'd rather release it early. :-)
+Given that there is no alternative to glorioustunnel I figured I'd rather release it early. :-)
 
 
 ## Contributing
 
 Contributions are welcome. 
 
-We use a [monorepo](https://github.com/berstend/hypertunnel) powered by [Lerna](https://github.com/lerna/lerna#--use-workspaces) (and yarn workspaces), [ava](https://github.com/avajs/ava) for testing and the [standard](https://standardjs.com/) style for linting.
+We use a [monorepo](https://github.com/torisetxd/glorioustunnel) powered by [Lerna](https://github.com/lerna/lerna#--use-workspaces) (and yarn workspaces), [ava](https://github.com/avajs/ava) for testing and the [standard](https://standardjs.com/) style for linting.
 
 <details>
  <summary><strong>Monorepo cheat sheet</strong></summary>
@@ -228,8 +228,8 @@ lerna add debug
 # Install debug in all packages as dev dependency
 lerna add --dev debug
 
-# Install fs-extra to hypertunnel-server
-lerna add fs-extra --scope=hypertunnel-server
+# Install fs-extra to glorioustunnel-server
+lerna add fs-extra --scope=glorioustunnel-server
 
 # Remove dependency
 # https://github.com/lerna/lerna/issues/833
@@ -244,7 +244,7 @@ yarn test
 ### Todo
 
 **server & client**
-- Hook into `hypertunnel-tcp-relay` events for better cleanup, error reporting and to show established connections
+- Hook into `glorioustunnel-tcp-relay` events for better cleanup, error reporting and to show established connections
 - Support environment variables next to cli params
 
 **client**

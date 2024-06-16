@@ -13,8 +13,8 @@ module.exports = async (argv) => {
     .usage('--port 8080 [options]')
     .option('-p, --port [port]', 'local TCP/IP service port to tunnel', parseInt)
     .option('-l, --localhost [localhost]', 'local server', 'localhost')
-    .option('-s, --server [server]', 'hypertunnel server to use', 'https://hypertunnel.ga')
-    .option('-t, --token [token]', 'token required by the server', 'free-server-please-be-nice')
+    .option('-s, --server [server]', 'glorioustunnel server to use', 'http://tunnel.glorious.host')
+    .option('-t, --token [token]', 'token required by the server', 'freeTunnel')
     .option('-i, --internet-port [port]', 'the desired internet port on the public server', parseInt)
     .option('--ssl', 'enable SSL termination (https://) on the public server')
     .parse(argv)
@@ -45,7 +45,7 @@ module.exports = async (argv) => {
   }, { ssl: program.ssl })
   await client.create()
   let message = `
-  ✨  Hypertunnel created.
+  ✨  Glorious Tunnel created.
 
   Tunneling ${client.uri} > ${client.host}:${client.port}
   `

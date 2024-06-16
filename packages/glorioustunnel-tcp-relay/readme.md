@@ -1,4 +1,4 @@
-# hypertunnel-tcp-relay
+# glorioustunnel-tcp-relay
 
 Heavily based on the excellent [node-tcp-relay](https://github.com/tewarid/node-tcp-relay) from [tewarid](https://github.com/tewarid).
 

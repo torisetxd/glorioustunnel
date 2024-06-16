@@ -1,9 +1,9 @@
 {
-  "name": "hypertunnel-tcp-relay",
+  "name": "glorioustunnel-tcp-relay",
   "version": "1.2.7",
-  "description": "Underlying TCP/IP relay for hypertunnel.",
+  "description": "Underlying TCP/IP relay for glorioustunnel.",
   "main": "index.js",
-  "repository": "berstend/hypertunnel",
+  "repository": "torisetxd/glorioustunnel",
   "author": "berstend & tewarid",
   "license": "MIT",
   "scripts": {
@@ -14,7 +14,7 @@
     "node": ">=8"
   },
   "keywords": [
-    "hypertunnel-tcp-relay",
+    "glorioustunnel-tcp-relay",
     "node-tcp-relay"
   ],
   "dependencies": {

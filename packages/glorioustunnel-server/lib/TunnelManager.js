@@ -1,13 +1,80 @@
 'use strict'
 
-const debug = require('debug')('hypertunnel:tunnelmanager')
+const debug = require('debug')('glorioustunnel:tunnelmanager')
 
-const { RelayServer, TLSRelayServer } = require('hypertunnel-tcp-relay').Server
-const getAvailablePort = require('get-port')
+const { RelayServer, TLSRelayServer } = require('glorioustunnel-tcp-relay').Server
+// const getAvailablePort = require('get-port')
 const { portValidator } = require('port-validator')
+// import net
+const net = require('net')
 
 const Tunnel = require('./Tunnel')
 const generateSecret = () => require('crypto').randomBytes(20).toString('hex')
+
+const settings = {
+  minPort: 10000,
+  maxPort: 20000
+}
+
+const validatePortRange = (port) => {
+  if (port < settings.minPort || port > settings.maxPort) {
+    throw new Error(`Port must be between ${settings.minPort} and ${settings.maxPort}`)
+  }
+}
+
+const checkAvailablePort = (options) =>
+  new Promise((resolve, reject) => {
+    validatePortRange(options.port)
+    const server = net.createServer()
+    server.unref()
+    server.on('error', reject)
+
+    server.listen(options, () => {
+      const { port } = server.address()
+      server.close(() => {
+        resolve(port)
+      })
+    })
+  })
+
+const getRandomAvailablePortInRange = async () => {
+  const { minPort, maxPort } = settings
+
+  while (true) {
+    const port = Math.floor(Math.random() * (maxPort - minPort + 1)) + minPort
+    try {
+      await checkAvailablePort({ port })
+      return port
+    } catch (error) {
+      if (error.code !== 'EADDRINUSE') {
+        throw error
+      }
+    }
+  }
+}
+
+const getAvailablePort = async (options, hosts) => {
+  if (options.port === 0) {
+    options.port = await getRandomAvailablePortInRange()
+  }
+  validatePortRange(options.port)
+
+  if (options.host) {
+    return checkAvailablePort(options)
+  }
+
+  for (const host of hosts) {
+    try {
+      await checkAvailablePort({ port: options.port, host }) // eslint-disable-line no-await-in-loop
+    } catch (error) {
+      if (!['EADDRNOTAVAIL', 'EINVAL'].includes(error.code)) {
+        throw error
+      }
+    }
+  }
+
+  return options.port
+}
 
 /**
  * Manage tunnels.

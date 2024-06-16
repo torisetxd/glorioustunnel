@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
-const { Server } = require('hypertunnel-server')
+const { Server } = require('glorioustunnel-server')
 
 async function main () {
   const server = new Server({
