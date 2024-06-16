@@ -69,7 +69,7 @@ ansible-playbook provisioning/vagrant.yml -i provisioning/hosts --private-key=.v
 - Update `~/.ssh/config`:
 
 ```
-Host glorioustunnel.ga
+Host tunnel.glorious.host
   User deploy
   IdentityFile ~/.ssh/glorioustunnel
   PreferredAuthentications publickey

@@ -2,4 +2,4 @@
 192.168.33.10 ansible_python_interpreter=/usr/bin/python3
 
 [remote]
-glorioustunnel.ga ansible_python_interpreter=/usr/bin/python3
+tunnel.glorious.host ansible_python_interpreter=/usr/bin/python3

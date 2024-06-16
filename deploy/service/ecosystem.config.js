@@ -6,7 +6,7 @@ const CONFIG = {
   deployUser: 'deploy',
   hosts: {
     vagrant: '192.168.33.10',
-    remote: 'glorioustunnel.ga'
+    remote: 'tunnel.glorious.host'
   }
 }
 
@@ -33,12 +33,12 @@ module.exports = {
         NODE_ENV: 'production',
         DEBUG: false,
         SERVER_PORT: 80,
-        SERVER_DOMAIN: `glorioustunnel.ga`,
+        SERVER_DOMAIN: `tunnel.glorious.host`,
         SERVER_TOKEN: 'freeTunnel',
         SSL_ENABLED: true,
         SSL_DEBUG: false,
         SSL_PORT: 443,
-        SSL_EMAIL: 'mail@glorioustunnel.ga',
+        SSL_EMAIL: 'mail@tunnel.glorious.host',
         SSL_PRODUCTION: true
       }
     },

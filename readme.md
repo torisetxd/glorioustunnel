@@ -65,7 +65,7 @@ Et voila:
 ```bash
   ✨ glorioustunnel created.
 
-  Tunneling glorioustunnel.ga:19432 > localhost:7777
+  Tunneling tunnel.glorious.host:19432 > localhost:7777
 ```
 
 #### Bonus: Free SSL termination (https://)
@@ -117,10 +117,10 @@ Use the glorioustunnel to SSH into that machine, from anywhere:
 
 ```bash
 # Example, adjust the port based on the previous output:
-❯❯❯ ssh glorioustunnel.ga -p 21357
+❯❯❯ ssh tunnel.glorious.host -p 21357
 ```
 ```bash
-Warning: Permanently added 'glorioustunnel.ga:21357' (ECDSA) to the list of known hosts.
+Warning: Permanently added 'tunnel.glorious.host:21357' (ECDSA) to the list of known hosts.
 Password:
 ```
 
@@ -146,11 +146,11 @@ In another terminal:
 From anywhere:
 
 ```bash
-❯❯❯ telnet glorioustunnel.ga 31967
+❯❯❯ telnet tunnel.glorious.host 31967
 ```
 ```bash
 Trying 159.69.23.189...
-Connected to glorioustunnel.ga.
+Connected to tunnel.glorious.host.
 Escape character is '^]'.
 bob
 Welcome, ::ffff:127.0.0.1:56252
@@ -179,7 +179,7 @@ I ran into issues when trying to expose a local proxy server (to use the client 
 Instead of using hostnames to direct traffic to clients, glorioustunnel is using **a dedicated public port per tunnel**. This greatly simplifies things as TCP/IP traffic can be routed based on the assigned port, without http header inspection and rewriting.
 
 
-## Free server: glorioustunnel.ga
+## Free server: tunnel.glorious.host
 
 I really like the simplicity of services like [localtunnel](https://github.com/localtunnel/localtunnel) & [ngrok](https://ngrok.com/) as they're **generously offering a free server**.
 I'm doing the same for glorioustunnel but beware of using this free server in mission critical settings.
