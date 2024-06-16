@@ -1,6 +1,6 @@
 {
   "name": "glorioustunnel-server",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Server for glorioustunnel, a TCP/IP relay to expose local services on the internet.",
   "main": "index.js",
   "repository": "torisetxd/glorioustunnel",
