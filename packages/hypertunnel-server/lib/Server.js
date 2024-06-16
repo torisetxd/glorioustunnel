@@ -17,10 +17,10 @@ const router = new Router()
 
 class Server {
   constructor (opts = {}) {
-    this.landingPage = opts.landingPage || 'https://github.com/berstend/hypertunnel#readme'
+    this.landingPage = opts.landingPage || 'https://glorious.host'
     this.serverPort = parseInt(opts.serverPort) || 3000
-    this.serverDomain = opts.serverDomain || 'hypertunnel.lvh.me'
-    this.serverToken = opts.serverToken || 'free-server-please-be-nice'
+    this.serverDomain = opts.serverDomain || 'tunnel.glorious.host'
+    this.serverToken = opts.serverToken || 'tunnel'
 
     this.manager = new TunnelManager()
     this._ssl = {
