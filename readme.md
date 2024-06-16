@@ -17,19 +17,18 @@ This is a fork of [berstend/hypertunnel](https://github.com/berstend/hypertunnel
 ```bash
 ❯❯❯ glorioustunnel --help
 
-  Usage: glorioustunnel --port 8080 [options]
+  Usage: cli --port 8080 [options]
 
   Expose any local TCP/IP service on the internet.
 
   Options:
-
     -v, --version                output the version number
     -p, --port [port]            local TCP/IP service port to tunnel
-    -l, --localhost [localhost]  local server (default: localhost)
-    -s, --server [server]        glorioustunnel server to use (default: http://tunnel.glorious.host)
-    -t, --token [token]          token required by the server (default: freeTunnel)
+    -l, --localhost [localhost]  local server (default: "localhost")
+    -s, --server [server]        glorious tunnel server to use
+    -t, --token [token]          token required by the server
     -i, --internet-port [port]   the desired internet port on the public server
-    --ssl                        enable SSL termination (https://) on the public server    
+    --ssl                        enable SSL termination (https://) on the public server
     -h, --help                   output usage information
 ```
 
@@ -71,12 +70,19 @@ If your use-case is to simply tunnel local HTTP/TCP server traffic, localtunnel/
 **Technical differences:**
 glorioustunnel uses a dedicated public port per tunnel, simplifying TCP/IP traffic routing without HTTP header inspection.
 
-## Free server: tunnel.glorious.host
+## Todo
+  
+🟥 -> Not Done
+🟨 -> Not finished
+🟩 -> Done and works.
 
-This fork offers a free server (temporarily) similar to localtunnel/ngrok. 
-Currently this is for my unreleased host for testing purposes however you may use it while it remains in beta testing.
+### Move Default Port Ranges to a setting 🟥
+- Make sure to modify the limits for your ports since this was a quick fix (for my case) and you will need to modify the package's code. Will fix soon.
 
-**Limits:** There are currently no enforced usage limits.
+## Free server?
+
+Used to offer a free server till I realized this simply cant scale enough.
+Currently this is for my unreleased host for testing purposes.
 
 ## Status
 
