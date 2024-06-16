@@ -12,7 +12,7 @@ const Tunnel = require('./Tunnel')
 const generateSecret = () => require('crypto').randomBytes(20).toString('hex')
 
 const settings = {
-  minPort: 10000,
+  minPort: 10470,
   maxPort: 10500
 }
 
