@@ -1,9 +1,9 @@
 {
-  "name": "hypertunnel-server",
+  "name": "glorioustunnel-server",
   "version": "1.1.11",
-  "description": "Server for hypertunnel, a TCP/IP relay to expose local services on the internet.",
+  "description": "Server for glorioustunnel, a TCP/IP relay to expose local services on the internet.",
   "main": "index.js",
-  "repository": "berstend/hypertunnel",
+  "repository": "torisetxd/glorioustunnel",
   "author": "berstend & tewarid",
   "license": "MIT",
   "scripts": {
