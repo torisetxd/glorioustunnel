@@ -1,8 +1,8 @@
 'use strict'
 
-const debug = require('debug')('hypertunnel:tunnelmanager')
+const debug = require('debug')('glorioustunnel:tunnelmanager')
 
-const { RelayServer, TLSRelayServer } = require('hypertunnel-tcp-relay').Server
+const { RelayServer, TLSRelayServer } = require('glorioustunnel-tcp-relay').Server
 // const getAvailablePort = require('get-port')
 // const { portValidator } = require('port-validator')
 const net = require('net')

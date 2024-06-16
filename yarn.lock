@@ -2670,7 +2670,7 @@ globby@^6.0.0, globby@^6.1.0:
     pinkie-promise "^2.0.0"
 
 "glorioustunnel-server@file:C:\\Users\\Alex\\Desktop\\Programming\\getPortTest\\glorioustunnel\\packages\\glorioustunnel-server":
-  version "1.3.2"
+  version "1.3.3"
   resolved "file:packages/glorioustunnel-server"
   dependencies:
     commander "^2.15.1"
