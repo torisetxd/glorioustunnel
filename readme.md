@@ -82,8 +82,7 @@ Glorious Tunnel uses a dedicated public port per tunnel, simplifying TCP/IP traf
 🟨 -> In Progress  
 🟩 -> Done
 
-- Move Default Port Ranges to a setting 🟥
-  - Modify the port limits in the package code as needed. This will be fixed soon.
+- Move Default Port Ranges to a setting 🟩 (Added max-age too)
 
 ## Free Server?
 
