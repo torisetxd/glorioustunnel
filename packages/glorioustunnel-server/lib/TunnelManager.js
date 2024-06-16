@@ -1,11 +1,10 @@
 'use strict'
 
-const debug = require('debug')('glorioustunnel:tunnelmanager')
+const debug = require('debug')('hypertunnel:tunnelmanager')
 
-const { RelayServer, TLSRelayServer } = require('glorioustunnel-tcp-relay').Server
+const { RelayServer, TLSRelayServer } = require('hypertunnel-tcp-relay').Server
 // const getAvailablePort = require('get-port')
-const { portValidator } = require('port-validator')
-// import net
+// const { portValidator } = require('port-validator')
 const net = require('net')
 
 const Tunnel = require('./Tunnel')
@@ -16,66 +15,38 @@ const settings = {
   maxPort: 10500
 }
 
-const validatePortRange = (port) => {
-  if (port < settings.minPort || port > settings.maxPort) {
-    throw new Error(`Port must be between ${settings.minPort} and ${settings.maxPort}`)
-  }
-}
-
-const checkAvailablePort = (options) =>
-  new Promise((resolve, reject) => {
-    validatePortRange(options.port)
+const checkAvailablePort = options => {
+  return new Promise((resolve, reject) => {
     const server = net.createServer()
     server.unref()
-    server.on('error', reject)
+
+    server.on('error', () => {
+      resolve(false)
+    })
 
     server.listen(options, () => {
-      const { port } = server.address()
-      server.close(() => {
-        resolve(port)
+      server.address()
+      server.close((err) => {
+        if (err) { reject(err) }
+        resolve(true)
       })
     })
   })
+}
 
-const getRandomAvailablePortInRange = async () => {
-  const { minPort, maxPort } = settings
-
-  while (true) {
-    const port = Math.floor(Math.random() * (maxPort - minPort + 1)) + minPort
-    try {
-      await checkAvailablePort({ port })
+const getAvailablePort = async (options = {}) => {
+  let port = Math.max(options.port || settings.minPort, settings.minPort)
+  for (; port <= settings.maxPort; port++) {
+    if (options.exclude && options.exclude.includes(port)) { continue }
+    let isValid = await checkAvailablePort({port})
+    if (isValid) {
       return port
-    } catch (error) {
-      if (error.code !== 'EADDRINUSE') {
-        throw error
-      }
+    } else {
+      continue
     }
   }
+  throw new Error('Could not find an available port')
 }
-
-const getAvailablePort = async (options, hosts) => {
-  if (options.port === 0) {
-    options.port = await getRandomAvailablePortInRange()
-  }
-  validatePortRange(options.port)
-
-  if (options.host) {
-    return checkAvailablePort(options)
-  }
-
-  for (const host of hosts) {
-    try {
-      await checkAvailablePort({ port: options.port, host }) // eslint-disable-line no-await-in-loop
-    } catch (error) {
-      if (!['EADDRNOTAVAIL', 'EINVAL'].includes(error.code)) {
-        throw error
-      }
-    }
-  }
-
-  return options.port
-}
-
 /**
  * Manage tunnels.
  */
@@ -97,8 +68,8 @@ class TunnelManager {
    */
   async newTunnel (desiredInternetPort = 0, desiredRelayPort = 0, opts = {}) {
     debug(`newTunnel - start`, desiredInternetPort, opts)
-    const internetPort = await getAvailablePort(this.sanitizePort(desiredInternetPort))
-    const relayPort = await getAvailablePort(this.sanitizePort(desiredRelayPort))
+    const internetPort = await getAvailablePort({port: desiredInternetPort})
+    const relayPort = await getAvailablePort({port: desiredRelayPort, exclude: [internetPort]})
     const relayOptions = { secret: generateSecret() }
 
     let relay = null
@@ -112,15 +83,6 @@ class TunnelManager {
     this.tunnels.set(tunnel.internetPort, tunnel)
     debug('newTunnel - end', tunnel, internetPort, relay, this.tunnels.size)
     return tunnel
-  }
-
-  sanitizePort (port = 0) {
-    const isValid = portValidator(port).validate()
-    if (!isValid) { return false }
-    if (!Number.isInteger(port)) { return false }
-    if (port < 1024 || port > 65535) { return false }
-    if (this.tunnels.has(port)) { return false }
-    return port
   }
 
   // very simplistic, we just remove tunnels older than a day
