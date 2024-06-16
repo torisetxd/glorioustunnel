@@ -16,13 +16,28 @@ const app = new Koa()
 const router = new Router()
 
 class Server {
+  /**
+   * Constructs a new instance of the Server class.
+   *
+   * @param {Object} opts - An optional object containing configuration options.
+   * @param {string} opts.landingPage - The URL of the landing page. Defaults to 'https://github.com/torisetxd/glorioustunnel'.
+   * @param {number} opts.serverPort - The port number to use for the server. Defaults to 3000.
+   * @param {string} opts.serverDomain - The domain to use for the server. Defaults to '127.0.0.1'.
+   * @param {string} opts.serverToken - The token to use for authentication. Defaults to 'SecureToken'.
+   * @param {Object} opts.managerSettings - An object containing the minimum and maximum port numbers and maximum age for the tunnel manager. Defaults to { minPort: 1024, maxPort: 65535, maxAge: 86400 }.
+   */
   constructor (opts = {}) {
     this.landingPage = opts.landingPage || 'https://github.com/torisetxd/glorioustunnel'
     this.serverPort = parseInt(opts.serverPort) || 3000
     this.serverDomain = opts.serverDomain || '127.0.0.1'
     this.serverToken = opts.serverToken || 'SecureToken'
+    this.tunnelManagerSettings = opts.managerSettings || {
+      minPort: 1024,
+      maxPort: 65535,
+      maxAge: 86400
+    }
 
-    this.manager = new TunnelManager()
+    this.manager = new TunnelManager(this.tunnelManagerSettings)
     this._ssl = {
       enabled: (process.env.SSL_ENABLED === 'true') || false,
       port: parseInt(process.env.SSL_PORT) || 443,
@@ -40,6 +55,12 @@ class Server {
     debug('created', opts)
   }
 
+  /**
+   * Generates a banner message to be displayed when the server token is the default token.
+   *
+   * @param {Object} body - The request body object.
+   * @return {string} The banner message to be displayed.
+   */
   generateBannerMessage (body) {
     if (this.serverToken !== 'SecureToken') { return }
     return `
@@ -48,6 +69,11 @@ class Server {
     `
   }
 
+  /**
+   * Creates and starts the server.
+   *
+   * @return {Promise<Server>} A promise that resolves to the created server instance.
+   */
   async create () {
     // error handler
     app.use(async (ctx, next) => {
@@ -223,6 +249,11 @@ class Server {
     })
   }
 
+  /**
+   * Closes the server by removing all tunnels and stopping the server.
+   *
+   * @return {void} This function does not return anything.
+   */
   close () {
     this.manager.removeAll()
     this._server.close()

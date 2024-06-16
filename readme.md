@@ -1,92 +1,97 @@
 # ✨ Glorious Tunnel
 
-This is a fork of [berstend/hypertunnel](https://github.com/berstend/hypertunnel) with some modifications to match our needs and specific port requierements.
+This is a customized version of [berstend/hypertunnel](https://github.com/berstend/hypertunnel) with modifications to meet specific port requirements and needs.
 
 ## Installation
 
+To use without installing:
 ```bash
-# Use directly with no installation (npx is part of npm):
-❯❯❯ npx glorioustunnel --port 8080
+npx glorioustunnel --port 8080
+```
 
-# Or install globally:
-❯❯❯ npm install -g glorioustunnel
+To install globally:
+```bash
+npm install -g glorioustunnel
 ```
 
 ## Usage
 
+To see available options:
 ```bash
-❯❯❯ glorioustunnel --help
-
-  Usage: cli --port 8080 [options]
-
-  Expose any local TCP/IP service on the internet.
-
-  Options:
-    -v, --version                output the version number
-    -p, --port [port]            local TCP/IP service port to tunnel
-    -l, --localhost [localhost]  local server (default: "localhost")
-    -s, --server [server]        glorious tunnel server to use
-    -t, --token [token]          token required by the server
-    -i, --internet-port [port]   the desired internet port on the public server
-    --ssl                        enable SSL termination (https://) on the public server
-    -h, --help                   output usage information
+glorioustunnel --help
 ```
+
+Usage:
+```bash
+glorioustunnel --port 8080 [options]
+```
+
+Expose any local TCP/IP service on the internet with these options:
+- `-v, --version`: Show version number
+- `-p, --port [port]`: Local TCP/IP service port to tunnel
+- `-l, --localhost [localhost]`: Local server (default: "localhost")
+- `-s, --server [server]`: Glorious Tunnel server to use
+- `-t, --token [token]`: Token required by the server
+- `-i, --internet-port [port]`: Desired internet port on the public server
+- `--ssl`: Enable SSL termination (https://) on the public server
+- `-h, --help`: Show help information
 
 ## Examples
 
-### Example: Local web server
+### Example: Local Web Server
 
+Run a static web server in your current directory:
 ```bash
-# Run a static web server in your current directory:
-❯❯❯ npx http-server -p 7777
-
-# Create a glorioustunnel to make that server accessible from the internet:
-❯❯❯ npx glorioustunnel -p 7777
+npx http-server -p 7777
 ```
 
-### Example: Remote SSH login
-
+Create a tunnel to make that server accessible from the internet:
 ```bash
-# Create a tunnel for the local SSH service running on port 22
-❯❯❯ npx glorioustunnel --port 22
+npx glorioustunnel -p 7777
 ```
 
-### Example: Run and expose a local telnet chat server
+### Example: Remote SSH Login
 
+Create a tunnel for the local SSH service running on port 22:
 ```bash
-❯❯❯ npx netchat server -p 3000
+npx glorioustunnel --port 22
 ```
 
-In another terminal:
+### Example: Local Telnet Chat Server
 
+Run a local telnet chat server:
 ```bash
-❯❯❯ npx glorioustunnel -p 3000
+npx netchat server -p 3000
 ```
 
-## Comparison to localtunnel/ngrok
+In another terminal, create a tunnel to make the chat server accessible:
+```bash
+npx glorioustunnel -p 3000
+```
 
-If your use-case is to simply tunnel local HTTP/TCP server traffic, localtunnel/ngrok are suggested. 
+## Comparison to Localtunnel/ngrok
+
+For simple HTTP/TCP server traffic tunneling, consider using localtunnel or ngrok. 
 
 **Technical differences:**
-glorioustunnel uses a dedicated public port per tunnel, simplifying TCP/IP traffic routing without HTTP header inspection.
+Glorious Tunnel uses a dedicated public port per tunnel, simplifying TCP/IP traffic routing without HTTP header inspection.
 
 ## Todo
-  
-🟥 -> Not Done
-🟨 -> Not finished
-🟩 -> Done and works.
 
-### Move Default Port Ranges to a setting 🟥
-- Make sure to modify the limits for your ports since this was a quick fix (for my case) and you will need to modify the package's code. Will fix soon.
+🟥 -> Not Done  
+🟨 -> In Progress  
+🟩 -> Done
 
-## Free server?
+- Move Default Port Ranges to a setting 🟥
+  - Modify the port limits in the package code as needed. This will be fixed soon.
 
-Used to offer a free server till I realized this simply cant scale enough.
-Currently this is for my unreleased host for testing purposes.
+## Free Server?
+
+A free server was offered but was not scalable, so no longer avaliable.
 
 ## Status
 
-It's doing what it says on the tin. Certain things could be improved and battle-hardened.
+The tool functions as described. Improvements are possible.
 
 ## Contributing
 

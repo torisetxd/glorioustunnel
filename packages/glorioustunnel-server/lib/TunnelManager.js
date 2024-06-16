@@ -3,59 +3,81 @@
 const debug = require('debug')('glorioustunnel:tunnelmanager')
 
 const { RelayServer, TLSRelayServer } = require('glorioustunnel-tcp-relay').Server
-// const getAvailablePort = require('get-port')
-// const { portValidator } = require('port-validator')
 const net = require('net')
 
 const Tunnel = require('./Tunnel')
 const generateSecret = () => require('crypto').randomBytes(20).toString('hex')
 
-const settings = {
-  minPort: 10470,
-  maxPort: 10500
-}
-
-const checkAvailablePort = options => {
-  return new Promise((resolve, reject) => {
-    const server = net.createServer()
-    server.unref()
-
-    server.on('error', () => {
-      resolve(false)
-    })
-
-    server.listen(options, () => {
-      server.address()
-      server.close((err) => {
-        if (err) { reject(err) }
-        resolve(true)
-      })
-    })
-  })
-}
-
-const getAvailablePort = async (options = {}) => {
-  let port = Math.max(options.port || settings.minPort, settings.minPort)
-  for (; port <= settings.maxPort; port++) {
-    if (options.exclude && options.exclude.includes(port)) { continue }
-    let isValid = await checkAvailablePort({port})
-    if (isValid) {
-      return port
-    } else {
-      continue
-    }
-  }
-  throw new Error('Could not find an available port')
-}
 /**
  * Manage tunnels.
  */
 class TunnelManager {
+/**
+ * Creates a new instance of the TunnelManager class.
+ *
+ * @param {Object} [opts={}] - Optional configuration options.
+ * @param {number} [opts.maxAge=86400] - The maximum age of tunnels in seconds. Defaults to 1 day.
+ * @param {number} [opts.minPort=1024] - The minimum port number for tunnels. Defaults to 1024.
+ * @param {number} [opts.maxPort=65535] - The maximum port number for tunnels. Defaults to 65535.
+ * @return {void}
+ */
   constructor (opts = {}) {
     this.tunnels = new Map() // internetPort -> relayServer map
     this.maxAge = opts.maxAge || 60 * 60 * 24 // 1 day in seconds
+    this.settings = {
+      minPort: opts.minPort || 1024,
+      maxPort: opts.maxPort || 65535
+    }
     this.removeExpiredTunnelsInterval()
     debug(`created`, opts)
+  }
+
+  /**
+   * Asynchronously checks the availability of a port.
+   *
+   * @param {Object} options - The options for checking the port availability.
+   * @return {Promise<boolean>} A Promise that resolves with a boolean indicating port availability.
+   */
+  async checkAvailablePort (options) {
+    return new Promise((resolve, reject) => {
+      const server = net.createServer()
+      server.unref()
+
+      server.on('error', () => {
+        resolve(false)
+      })
+
+      server.listen(options, () => {
+        server.address()
+        server.close((err) => {
+          if (err) { reject(err) }
+          resolve(true)
+        })
+      })
+    })
+  }
+
+  /**
+   * Finds an available port within the specified range.
+   *
+   * @param {Object} options - The options for finding the available port.
+   * @param {number} [options.port] - The desired port to start searching from.
+   * @param {Array<number>} [options.exclude] - The ports to exclude from the search.
+   * @return {Promise<number>} - A promise that resolves with the available port.
+   * @throws {Error} - If no available port is found within the specified range.
+   */
+  async getAvailablePort (options = {}) {
+    let port = Math.max(options.port || this.settings.minPort, this.settings.minPort)
+    for (; port <= this.settings.maxPort; port++) {
+      if (options.exclude && options.exclude.includes(port)) { continue }
+      let isValid = await this.checkAvailablePort({port})
+      if (isValid) {
+        return port
+      } else {
+        continue
+      }
+    }
+    throw new Error('Could not find an available port')
   }
 
   /**
@@ -68,8 +90,8 @@ class TunnelManager {
    */
   async newTunnel (desiredInternetPort = 0, desiredRelayPort = 0, opts = {}) {
     debug(`newTunnel - start`, desiredInternetPort, opts)
-    const internetPort = await getAvailablePort({port: desiredInternetPort})
-    const relayPort = await getAvailablePort({port: desiredRelayPort, exclude: [internetPort]})
+    const internetPort = await this.getAvailablePort({port: desiredInternetPort})
+    const relayPort = await this.getAvailablePort({port: desiredRelayPort, exclude: [internetPort]})
     const relayOptions = { secret: generateSecret() }
 
     let relay = null
