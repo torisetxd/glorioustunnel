@@ -13,7 +13,7 @@ const generateSecret = () => require('crypto').randomBytes(20).toString('hex')
 
 const settings = {
   minPort: 10000,
-  maxPort: 20000
+  maxPort: 10500
 }
 
 const validatePortRange = (port) => {

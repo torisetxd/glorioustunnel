@@ -66,7 +66,7 @@ In another terminal:
 
 ## Comparison to localtunnel/ngrok
 
-If your use-case is to simply tunnel local HTTP web server traffic, localtunnel/ngrok are suggested. 
+If your use-case is to simply tunnel local HTTP/TCP server traffic, localtunnel/ngrok are suggested. 
 
 **Technical differences:**
 glorioustunnel uses a dedicated public port per tunnel, simplifying TCP/IP traffic routing without HTTP header inspection.
