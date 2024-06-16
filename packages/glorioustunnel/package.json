@@ -1,6 +1,6 @@
 {
   "name": "glorioustunnel",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Expose any local TCP/IP service on the internet.",
   "main": "index.js",
   "repository": "torisetxd/glorioustunnel",
