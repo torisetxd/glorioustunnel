@@ -17,10 +17,10 @@ const router = new Router()
 
 class Server {
   constructor (opts = {}) {
-    this.landingPage = opts.landingPage || 'https://glorious.host'
+    this.landingPage = opts.landingPage || 'https://github.com/torisetxd/glorioustunnel'
     this.serverPort = parseInt(opts.serverPort) || 3000
-    this.serverDomain = opts.serverDomain || 'tunnel.glorious.host'
-    this.serverToken = opts.serverToken || 'tunnel'
+    this.serverDomain = opts.serverDomain || '127.0.0.1'
+    this.serverToken = opts.serverToken || 'SecureToken'
 
     this.manager = new TunnelManager()
     this._ssl = {
@@ -41,12 +41,10 @@ class Server {
   }
 
   generateBannerMessage (body) {
-    if (this.serverToken !== 'freeTunnel') { return }
+    if (this.serverToken !== 'SecureToken') { return }
     return `
-  You're using a free service, please be gentle. :-)
+  You're using the default token. Change it for security reasons.
   Contributions welcome: ${this.landingPage}
-
-  Hit ctrl+c to close the tunnel (maximum tunnel age is 1 day).
     `
   }
 
